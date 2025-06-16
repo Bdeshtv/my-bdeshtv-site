@@ -3,15 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>তারেক রহমান যেকোনো সময় দেশে আসবে | BdeshTV</title>
-
-  <!-- ✅ Open Graph meta tags for social sharing -->
-  <meta property="og:title" content="তারেক রহমান যেকোনো সময় দেশে আসবে | BdeshTV" />
-  <meta property="og:description" content="দীর্ঘ নির্বাসন শেষে দেশে ফিরছেন বিএনপির ভারপ্রাপ্ত চেয়ারম্যান তারেক রহমান। লন্ডনে ড. ইউনূসের সঙ্গে বৈঠকের পর উত্তেজনা..." />
-  <meta property="og:image" content="https://bdeshtv.github.io/my-bdeshtv-site/images/20250616_103726.png" />
-  <meta property="og:url" content="https://bdeshtv.github.io/my-bdeshtv-site/news.html" />
-  <meta property="og:type" content="article" />
-
+  <title>নিউজ - বিদেশ টিভি</title>
   <style>
     body {
       font-family: 'Siyam Rupali', Arial, sans-serif;
@@ -25,33 +17,38 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    article.news-item {
+    .news-item {
       background: white;
       padding: 1rem 1.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       border-radius: 5px;
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
     }
-    article.news-item time {
+    .news-item img {
+      max-width: 200px;
+      border-radius: 5px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .news-content {
+      flex: 1;
+    }
+    .news-item time {
       font-size: 0.9rem;
       color: #888;
       display: block;
       margin-bottom: 0.5rem;
     }
-    article.news-item h2 {
+    .news-item h2 {
       margin: 0 0 0.5rem 0;
       font-size: 1.2rem;
     }
-    article.news-item p {
-      margin: 0 0 1rem 0;
-      line-height: 1.6;
-    }
-    article.news-item img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-bottom: 1rem;
+    .news-item p {
+      margin: 0;
+      line-height: 1.5;
     }
     a.back-home {
       display: inline-block;
@@ -72,30 +69,47 @@
 <body>
   <h1>বিদেশ টিভির সব খবর</h1>
 
-  <article class="news-item">
-    <time datetime="2025-06-16">১৬ জুন ২০২৫</time>
-    <h2>তারেক রহমান যেকোনো সময় দেশে আসবে</h2>
-    <img src="images/20250616_103726.png" alt="তারেক রহমানের সংবাদ ছবি" />
-    <p>
-      তারেক রহমানের প্রত্যাবর্তন ঘিরে উত্তাল বিএনপি, ২০ লাখ কর্মীর সমাবেশে প্রস্তুতি।
-      ঢাকা, ১৬ জুন ২০২৫: দীর্ঘ নির্বাসন শেষে অবশেষে দেশে ফিরছেন বিএনপির ভারপ্রাপ্ত চেয়ারম্যান তারেক রহমান।
-      সবকিছু ঠিক থাকলে আগামী দেড় মাসের মধ্যেই, অর্থাৎ ৫ আগস্টের আগেই লন্ডন থেকে ঢাকায় পা রাখছেন তিনি।
-    </p>
-    <p>
-      এই প্রত্যাবর্তনকে ঘিরে বিএনপি নেতাকর্মীদের মধ্যে দেখা দিয়েছে ব্যাপক উৎসাহ-উদ্দীপনা।
-      দলটি ঘোষণা দিয়েছে, তার স্বাগত জানাতে রাজধানী ঢাকাকে জনসমুদ্রে পরিণত করা হবে।
-    </p>
-    <p>
-      <strong>গণতন্ত্র পুনরুদ্ধারে নেতৃত্ব দেবেন দেশে ফিরে:</strong>
-      বিএনপি সূত্র বলছে, দেশে ফিরে সরাসরি আন্দোলনের নেতৃত্ব দেবেন তারেক রহমান।
-      এবার সরাসরি রাজপথে উপস্থিত হয়ে "গণতন্ত্র পুনরুদ্ধার" আন্দোলনকে নতুন মাত্রায় নিয়ে যাওয়ার পরিকল্পনা রয়েছে।
-    </p>
-    <p>
-      <strong>‘আইনগত কোনো বাধা নেই’—বললেন আমীর খসরু:</strong>
-      “তারেক রহমানের দেশে ফিরতে কোনো আইনগত বাধা নেই। তিনি যেকোনো সময় ফিরতে পারেন।”
-    </p>
-  </article>
+  <div id="news-container">
+    <!-- নিউজগুলো এখানে লোড হবে -->
+  </div>
 
   <a href="index.html" class="back-home">হোমপেজে ফিরে যাও</a>
+
+  <script>
+    async function loadNews() {
+      try {
+        const response = await fetch('news.json');
+        const newsList = await response.json();
+
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+
+        newsList.forEach(news => {
+          const newsItem = document.createElement('article');
+          newsItem.className = 'news-item';
+
+          newsItem.innerHTML = `
+            <img src="${news.image}" alt="${news.title}">
+            <div class="news-content">
+              <time datetime="${news.date}">${new Date(news.date).toLocaleDateString('bn-BD', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}</time>
+              <h2>${news.title}</h2>
+              <p>${news.description}</p>
+            </div>
+          `;
+
+          container.appendChild(newsItem);
+        });
+      } catch (error) {
+        console.error('নিউজ লোড করতে সমস্যা হয়েছে:', error);
+        document.getElementById('news-container').innerHTML = '<p>নিউজ লোড করা যায়নি। পরে আবার চেষ্টা করুন।</p>';
+      }
+    }
+
+    loadNews();
+  </script>
 </body>
 </html>

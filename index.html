@@ -1,135 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B+DESHtv - বাংলাদেশের খবর</title>
-    <style>
-        /* CSS রিসেট ও বেসিক স্টাইল */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        /* হেডার স্টাইল */
-        header {
-            background-color: #ffffff;
-            padding: 15px 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            height: 50px; /* লোগোর উচ্চতা পরিবর্তন করুন প্রয়োজন হলে */
-            margin-right: 15px;
-        }
-        
-        .site-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #0066cc;
-        }
-        
-        /* নেভিগেশন মেনু */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: #333333;
-            font-weight: 600;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #0066cc;
-        }
-        
-        /* মূল কন্টেন্ট */
-        main {
-            padding: 30px;
-            min-height: 70vh;
-        }
-        
-        .content-box {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-        
-        /* ফুটার */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f8f9fa;
-            color: #666666;
-            font-size: 14px;
-        }
-        
-        /* মোবাইল রেস্পন্সিভ */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-            }
-            
-            .logo-container {
-                margin-bottom: 15px;
-            }
-            
-            nav ul {
-                gap: 15px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B-deshtv</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+      background-color: white;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #fffbe6, #fff3cc);
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    header img {
+      height: 150px;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px 15px;
+      background: linear-gradient(to bottom, #fffef0, #fff7cc);
+    }
+
+    footer {
+      background-color: #f2f2f2;
+      padding: 15px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <!-- হেডার সেকশন -->
-    <header>
-        <div class="logo-container">
-            <!-- আপনার লোগো -->
-            <img src="FB_IMG_1750081031282.jpg" alt="B+DESHtv Logo" class="logo">
-            <span class="site-title">B+DESHtv</span>
-        </div>
-        
-        <!-- মেনু নেভিগেশন -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- মূল কন্টেন্ট -->
-    <main>
-        <div class="content-box">
-            <h2>This box</h2>
-            <p>B-deshtv (5)</p>
-        </div>
-    </main>
+  <header>
+    <img src="1000127778.png" alt="B-deshtv Logo">
+  </header>
 
-    <!-- ফুটার -->
-    <footer>
-        <p>📞 2025 B-deshtv. 🌟️</p>
-    </footer>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./news.html">News</a>
+    <a href="./contact.html">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h1>স্বাগতম B-deshtv তে!</h1>
+    <p>এটি একটি গণ মাধ্যম সংবাদ পেইজ, এখানে দেশ ও বিশ্বের সর্বশেষ খবর প্রকাশ করা হয়।</p>
+  </section>
+
+  <footer>
+    &copy; 2025 B-deshtv. সর্বস্বত্ব সংরক্ষিত।
+  </footer>
+
 </body>
 </html>

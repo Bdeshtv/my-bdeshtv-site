@@ -9,53 +9,53 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
       background-color: white;
       color: #333;
       text-align: center;
     }
 
     header {
-      background: linear-gradient(to right, #fffbe6, #fff2cc); /* সাদা-হলুদের ব্যাকগ্রাউন্ড */
+      background: linear-gradient(to right, #fffbe6, #fff3cc);
       padding: 20px;
       border-bottom: 1px solid #ccc;
     }
 
     header img {
-      height: 80px;
+      height: 150px; /* লোগো আরও বড় */
     }
 
-    main {
-      padding: 30px 15px;
+    nav {
+      background-color: #333;
+      padding: 10px 0;
     }
 
-    .highlight {
-      background: linear-gradient(to right, #fffbe6, #fff2cc);
-      padding: 40px 20px;
-      margin-top: 20px;
-    }
-
-    .highlight h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .highlight p {
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
       font-size: 16px;
-      margin: 0;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px 15px;
+      background: linear-gradient(to bottom, #fffef0, #fff7cc);
+    }
+
+    #contact {
+      background: linear-gradient(to right, #fffbe6, #fff3cc);
+      padding: 40px 15px;
     }
 
     footer {
-      margin-top: 40px;
-      padding: 15px;
       background-color: #f2f2f2;
+      padding: 15px;
       font-size: 14px;
-    }
-
-    .contact-info {
-      background-color: #fffbe6;
-      padding: 20px;
-      font-size: 15px;
-      margin-top: 10px;
     }
   </style>
 </head>
@@ -65,26 +65,37 @@
     <img src="1000127778.png" alt="BDeshTV Logo">
   </header>
 
-  <main>
-    <h1>স্বাগতম BDeshTV তে!</h1>
-    <p>এটি একটি গন মাধ্যম সংবাদ পেইজ, এখানে দেশ ও বিদেশের
-      সর্বশেষ খবর প্রকাশ করা হয়।</p>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <div class="highlight">
-      <h2>নতুন খবর</h2>
-      <p> বিস্তারিত আসছে...</p>
-    </div>
-  </main>
+  <section id="home">
+    <h1>স্বাগতম BDeshTV তে!</h1>
+    <p>এটি একটি গণ মাধ্যম সংবাদ পেইজ, এখানে দেশ ও বিশ্বের সর্বশেষ খবর প্রকাশ করা হয়।</p>
+  </section>
+
+  <section id="about">
+    <h2>আমাদের সম্পর্কে</h2>
+    <p>BDeshTV বাংলাদেশের একটি অনলাইন ভিত্তিক সংবাদ মাধ্যম।</p>
+  </section>
+
+  <section id="news">
+    <h2>নতুন খবর</h2>
+    <p>বিস্তারিত আসছে…</p>
+  </section>
+
+  <section id="contact">
+    <h2>যোগাযোগ</h2>
+    <p>📞 +971567577153</p>
+    <p>✉️ info@bdeshtv24@gmail.com</p>
+    <p>📍 দুবাই, সংযুক্ত আরব আমিরাত</p>
+  </section>
 
   <footer>
     &copy; 2025 BDeshTV. সর্বস্বত্ব সংরক্ষিত।
-    
-    <div class="contact-info">
-      <p><strong>যোগাযোগ:</strong></p>
-      <p>📞 +971567577153</p>
-      <p>✉️ info@bdeshtv24@gmail.com</p>
-      <p>📍 দুবাই, সংযুক্ত আরব আমিরাত</p>
-    </div>
   </footer>
 
 </body>

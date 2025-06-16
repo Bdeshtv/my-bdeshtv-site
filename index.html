@@ -15,7 +15,7 @@
     }
 
     header {
-      background-color: white;
+      background: linear-gradient(to right, #fffbe6, #fff2cc); /* সাদা-হলুদের ব্যাকগ্রাউন্ড */
       padding: 20px;
       border-bottom: 1px solid #ccc;
     }
@@ -28,11 +28,34 @@
       padding: 30px 15px;
     }
 
+    .highlight {
+      background: linear-gradient(to right, #fffbe6, #fff2cc);
+      padding: 40px 20px;
+      margin-top: 20px;
+    }
+
+    .highlight h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .highlight p {
+      font-size: 16px;
+      margin: 0;
+    }
+
     footer {
       margin-top: 40px;
       padding: 15px;
       background-color: #f2f2f2;
       font-size: 14px;
+    }
+
+    .contact-info {
+      background-color: #fffbe6;
+      padding: 20px;
+      font-size: 15px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -44,11 +67,24 @@
 
   <main>
     <h1>স্বাগতম BDeshTV তে!</h1>
-    <p>এটি একটি পরীক্ষামূলক ওয়েবসাইট। এখানে আপনার কনটেন্ট, ভিডিও, খবর ইত্যাদি আপলোড করা যাবে।</p>
+    <p>এটি একটি গন মাধ্যম সংবাদ চ্যানেল। এখানে 
+  কনটেন্ট, ভিডিও, খবর ইত্যাদি আপলোড করা যাবে।</p>
+
+    <div class="highlight">
+      <h2>নতুন খবর</h2>
+      <p>বাংলাদেশের সর্বশেষ খবর সবার আগে</p>
+    </div>
   </main>
 
   <footer>
     &copy; 2025 BDeshTV. সর্বস্বত্ব সংরক্ষিত।
+    
+    <div class="contact-info">
+      <p><strong>যোগাযোগ:</strong></p>
+      <p>📞 +971567577153</p>
+      <p>✉️ info@bdeshtv24@gmail.com</p>
+      <p>📍 দুবাই, সংযুক্ত আরব আমিরাত</p>
+    </div>
   </footer>
 
 </body>

@@ -4,61 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>বাংলাদেশ নিউজ</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    hr {
-      margin: 20px 0;
-    }
-    a {
-      text-decoration: none;
-      color: #007bff;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .news-item {
-      margin-bottom: 30px;
-    }
-    .news-item img {
-      max-width: 300px;
-      display: block;
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-  </style>
 </head>
 <body>
-  <div id="news-container">
-    <!-- নিউজগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে লোড হবে -->
-  </div>
+  <div id="news-container">লোড হচ্ছে...</div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const newsId = params.get('id');
+    console.log('newsId:', newsId);
 
     fetch('news.json')
       .then(res => res.json())
       .then(data => {
+        console.log('news data:', data);
         const container = document.getElementById('news-container');
 
-        if (newsId) {
-          // নির্দিষ্ট একটি নিউজ দেখানো
+        if(newsId) {
           const news = data.find(n => n.id === newsId);
+          console.log('found news:', news);
           if(news) {
             container.innerHTML = `
               <h2>${news.title}</h2>
-              <img src="${news.image}" alt="${news.title}" />
-              <p><strong>তারিখ: </strong>${news.date}</p>
+              <img src="${news.image}" alt="${news.title}" style="max-width:100%;" />
+              <p><b>তারিখ: </b>${news.date}</p>
               <p>${news.description}</p>
               <p><a href="news.html">← সব খবর দেখুন</a></p>
             `;
@@ -66,14 +34,13 @@
             container.innerHTML = `<p>নিউজ পাওয়া যায়নি।</p>`;
           }
         } else {
-          // সব নিউজ লিস্ট আকারে দেখানো
           let html = '';
           data.forEach(news => {
             html += `
-              <div class="news-item">
+              <div style="margin-bottom:20px;">
                 <h3>${news.title}</h3>
-                <img src="${news.image}" alt="${news.title}" />
-                <p><strong>তারিখ: </strong>${news.date}</p>
+                <img src="${news.image}" alt="${news.title}" style="max-width:300px;" />
+                <p><b>তারিখ: </b>${news.date}</p>
                 <p>${news.description.substring(0, 150)}...</p>
                 <p>
                   <a href="news.html?id=${news.id}">পুরো খবর পড়ুন</a> |
@@ -87,8 +54,8 @@
         }
       })
       .catch(err => {
+        console.error('Error fetching news:', err);
         document.getElementById('news-container').innerHTML = '<p>নিউজ লোড করতে সমস্যা হয়েছে।</p>';
-        console.error(err);
       });
   </script>
 </body>

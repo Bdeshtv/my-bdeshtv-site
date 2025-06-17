@@ -2,94 +2,122 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>বিদেশ টিভি নিউজ</title>
-
-  <!-- Open Graph meta tags -->
-  <meta property="og:title" content="বিদেশ টিভি নিউজ" />
-  <meta property="og:description" content="সর্বশেষ এবং বিস্তারিত খবর" />
-  <meta property="og:image" content="https://bdeshtv.github.io/my-bdeshtv-site/default-image.jpg" />
-  <meta property="og:url" content="https://bdeshtv.github.io/my-bdeshtv-site/news.html" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>বিদেশ টিভি - খবর</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px auto;
+      font-family: sans-serif;
       max-width: 800px;
+      margin: auto;
+      padding: 20px;
     }
-    img {
-      max-width: 100%;
-      height: auto;
+    .news-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    hr {
-      margin: 20px 0;
+    .news-card img {
+      width: 100%;
+      border-radius: 8px;
     }
-    a {
-      text-decoration: none;
-      color: #007bff;
+    .share-menu {
+      display: none;
+      margin-top: 10px;
     }
-    a:hover {
-      text-decoration: underline;
+    .share-menu button {
+      margin-right: 10px;
+      margin-top: 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
     }
-    .news-item {
-      margin-bottom: 30px;
-    }
-    .news-item img {
-      max-width: 300px;
-      display: block;
-      margin: 5px 0;
-    }
+    .fb { background: #4267B2; color: white; }
+    .wa { background: #25D366; color: white; }
+    .copy { background: #555; color: white; }
   </style>
 </head>
 <body>
-  <div id="news-container">লোড হচ্ছে...</div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const newsId = params.get('id');
+<h1>বিদেশ টিভি - সর্বশেষ সংবাদ</h1>
 
-    fetch('news.json')
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('news-container');
+<div id="news-container"></div>
 
-        if (newsId) {
-          const news = data.find(n => n.id === newsId);
-          if (news) {
-            container.innerHTML = `
-              <h2>${news.title}</h2>
-              <img src="${news.image}" alt="${news.title}" />
-              <p><strong>তারিখ:</strong> ${news.date}</p>
-              <p>${news.description}</p>
-              <p><a href="news.html">← সব খবর দেখুন</a></p>
-            `;
-          } else {
-            container.innerHTML = `<p>নিউজ পাওয়া যায়নি।</p>`;
-          }
-        } else {
-          let html = '';
-          data.forEach(news => {
-            html += `
-              <div class="news-item">
-                <h3>${news.title}</h3>
-                <img src="${news.image}" alt="${news.title}" />
-                <p><strong>তারিখ:</strong> ${news.date}</p>
-                <p>${news.description.substring(0, 150)}...</p>
-                <p>
-                  <a href="news.html?id=${news.id}">পুরো খবর পড়ুন</a> |
-                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://bdeshtv.github.io/my-bdeshtv-site/news.html?id=${news.id}" target="_blank" rel="noopener noreferrer">ফেসবুকে শেয়ার</a>
-                </p>
-                <hr />
-              </div>
-            `;
-          });
-          container.innerHTML = html;
-        }
-      })
-      .catch(err => {
-        document.getElementById('news-container').innerHTML = '<p>নিউজ লোড করতে সমস্যা হয়েছে।</p>';
-        console.error(err);
+<script>
+const params = new URLSearchParams(window.location.search);
+const newsId = params.get('id');
+
+fetch('https://raw.githubusercontent.com/Bdeshtv/my-bdeshtv-site/main/news.json')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('news-container');
+
+    if (newsId) {
+      const news = data.find(n => n.id === newsId);
+      if (news) {
+        container.innerHTML = `
+          <div class="news-card">
+            <h2>${news.title}</h2>
+            <img src="${news.image}" alt="${news.title}">
+            <p><strong>${news.date}</strong></p>
+            <p>${news.description}</p>
+            <p><a href="news.html">← সব খবর দেখুন</a></p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = '<p>নিউজ পাওয়া যায়নি।</p>';
+      }
+    } else {
+      let html = '';
+      data.forEach(news => {
+        const link = `https://bdeshtv.github.io/my-bdeshtv-site/news.html?id=${news.id}`;
+        html += `
+          <div class="news-card">
+            <h3>${news.title}</h3>
+            <img src="${news.image}" alt="${news.title}">
+            <p><strong>${news.date}</strong></p>
+            <p>${news.description.substring(0, 100)}...</p>
+            <p><a href="news.html?id=${news.id}">এই নিউজটি পড়ুন</a></p>
+            <button onclick="toggleShare(this)">🔗 শেয়ার করুন</button>
+            <div class="share-menu">
+              <button class="fb" onclick="shareToFacebook('${link}')"> Facebook</button>
+              <button class="wa" onclick="shareToWhatsApp('${link}')"> WhatsApp</button>
+              <button class="copy" onclick="copyLink('${link}', this)">🔗 Copy</button>
+            </div>
+          </div>
+        `;
       });
-  </script>
+      container.innerHTML = html;
+    }
+  });
+
+function toggleShare(btn) {
+  const menu = btn.nextElementSibling;
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+function shareToFacebook(link) {
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+  window.open(url, '_blank');
+}
+
+function shareToWhatsApp(link) {
+  const url = `https://wa.me/?text=${encodeURIComponent(link)}`;
+  window.open(url, '_blank');
+}
+
+function copyLink(link, btn) {
+  navigator.clipboard.writeText(link).then(() => {
+    btn.innerText = '✅ কপি হয়েছে!';
+    setTimeout(() => {
+      btn.innerText = '🔗 Copy';
+    }, 2000);
+  });
+}
+</script>
+
 </body>
 </html>

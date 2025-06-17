@@ -1,37 +1,95 @@
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const newsId = params.get('id');
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>বাংলাদেশ নিউজ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    hr {
+      margin: 20px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .news-item {
+      margin-bottom: 30px;
+    }
+    .news-item img {
+      max-width: 300px;
+      display: block;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="news-container">
+    <!-- নিউজগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে লোড হবে -->
+  </div>
 
-  fetch('news.json')
-    .then(res => res.json())
-    .then(data => {
-      if (newsId) {
-        // শুধু নির্দিষ্ট ১টি নিউজ দেখাও
-        const news = data.find(n => n.id === newsId);
-        document.body.innerHTML = `
-          <h2>${news.title}</h2>
-          <img src="${news.image}" style="max-width:100%;">
-          <p>${news.date}</p>
-          <p>${news.description}</p>
-          <a href="news.html">← সবগুলো দেখুন</a>
-        `;
-      } else {
-        // সবগুলো নিউজ লিস্ট আকারে দেখাও
-        let html = '';
-        data.forEach(news => {
-          html += `
-            <div>
-              <h3>${news.title}</h3>
-              <img src="${news.image}" style="max-width:300px;">
-              <p>${news.date}</p>
-              <p>${news.description.substring(0, 100)}...</p>
-              <a href="news.html?id=${news.id}">এই নিউজটি পড়ুন</a> |
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://bdeshtv.github.io/my-bdeshtv-site/news.html?id=${news.id}" target="_blank">ফেসবুকে শেয়ার</a>
-              <hr/>
-            </div>
-          `;
-        });
-        document.body.innerHTML = html;
-      }
-    });
-</script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const newsId = params.get('id');
+
+    fetch('news.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('news-container');
+
+        if (newsId) {
+          // নির্দিষ্ট একটি নিউজ দেখানো
+          const news = data.find(n => n.id === newsId);
+          if(news) {
+            container.innerHTML = `
+              <h2>${news.title}</h2>
+              <img src="${news.image}" alt="${news.title}" />
+              <p><strong>তারিখ: </strong>${news.date}</p>
+              <p>${news.description}</p>
+              <p><a href="news.html">← সব খবর দেখুন</a></p>
+            `;
+          } else {
+            container.innerHTML = `<p>নিউজ পাওয়া যায়নি।</p>`;
+          }
+        } else {
+          // সব নিউজ লিস্ট আকারে দেখানো
+          let html = '';
+          data.forEach(news => {
+            html += `
+              <div class="news-item">
+                <h3>${news.title}</h3>
+                <img src="${news.image}" alt="${news.title}" />
+                <p><strong>তারিখ: </strong>${news.date}</p>
+                <p>${news.description.substring(0, 150)}...</p>
+                <p>
+                  <a href="news.html?id=${news.id}">পুরো খবর পড়ুন</a> |
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://bdeshtv.github.io/my-bdeshtv-site/news.html?id=${news.id}" target="_blank" rel="noopener noreferrer">ফেসবুকে শেয়ার</a>
+                </p>
+                <hr/>
+              </div>
+            `;
+          });
+          container.innerHTML = html;
+        }
+      })
+      .catch(err => {
+        document.getElementById('news-container').innerHTML = '<p>নিউজ লোড করতে সমস্যা হয়েছে।</p>';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>

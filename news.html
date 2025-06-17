@@ -1,115 +1,37 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>নিউজ - বিদেশ টিভি</title>
-  <style>
-    body {
-      font-family: 'Siyam Rupali', Arial, sans-serif;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .news-item {
-      background: white;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1.5rem;
-      border-radius: 5px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .news-item img {
-      max-width: 200px;
-      border-radius: 5px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .news-content {
-      flex: 1;
-    }
-    .news-item time {
-      font-size: 0.9rem;
-      color: #888;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .news-item h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.2rem;
-    }
-    .news-item p {
-      margin: 0;
-      line-height: 1.5;
-    }
-    a.back-home {
-      display: inline-block;
-      margin-top: 2rem;
-      text-decoration: none;
-      color: #0077cc;
-      border: 1px solid #0077cc;
-      padding: 0.4rem 1rem;
-      border-radius: 3px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    a.back-home:hover {
-      background-color: #0077cc;
-      color: white;
-    }
-  </style>
-</head>
-<body>
-  <h1>বিদেশ টিভির সব খবর</h1>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const newsId = params.get('id');
 
-  <div id="news-container">
-    <!-- নিউজগুলো এখানে লোড হবে -->
-  </div>
-
-  <a href="index.html" class="back-home">হোমপেজে ফিরে যাও</a>
-
-  <script>
-    async function loadNews() {
-      try {
-        const response = await fetch('news.json');
-        const newsList = await response.json();
-
-        const container = document.getElementById('news-container');
-        container.innerHTML = '';
-
-        newsList.forEach(news => {
-          const newsItem = document.createElement('article');
-          newsItem.className = 'news-item';
-
-          newsItem.innerHTML = `
-            <img src="${news.image}" alt="${news.title}">
-            <div class="news-content">
-              <time datetime="${news.date}">${new Date(news.date).toLocaleDateString('bn-BD', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}</time>
-              <h2>${news.title}</h2>
-              <p>${news.description}</p>
+  fetch('news.json')
+    .then(res => res.json())
+    .then(data => {
+      if (newsId) {
+        // শুধু নির্দিষ্ট ১টি নিউজ দেখাও
+        const news = data.find(n => n.id === newsId);
+        document.body.innerHTML = `
+          <h2>${news.title}</h2>
+          <img src="${news.image}" style="max-width:100%;">
+          <p>${news.date}</p>
+          <p>${news.description}</p>
+          <a href="news.html">← সবগুলো দেখুন</a>
+        `;
+      } else {
+        // সবগুলো নিউজ লিস্ট আকারে দেখাও
+        let html = '';
+        data.forEach(news => {
+          html += `
+            <div>
+              <h3>${news.title}</h3>
+              <img src="${news.image}" style="max-width:300px;">
+              <p>${news.date}</p>
+              <p>${news.description.substring(0, 100)}...</p>
+              <a href="news.html?id=${news.id}">এই নিউজটি পড়ুন</a> |
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://bdeshtv.github.io/my-bdeshtv-site/news.html?id=${news.id}" target="_blank">ফেসবুকে শেয়ার</a>
+              <hr/>
             </div>
           `;
-
-          container.appendChild(newsItem);
         });
-      } catch (error) {
-        console.error('নিউজ লোড করতে সমস্যা হয়েছে:', error);
-        document.getElementById('news-container').innerHTML = '<p>নিউজ লোড করা যায়নি। পরে আবার চেষ্টা করুন।</p>';
+        document.body.innerHTML = html;
       }
-    }
-
-    loadNews();
-  </script>
-</body>
-</html>
+    });
+</script>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>বিদেশ টিভির অভ্যন্তরীণ সংকট</title>
 
-  <!-- Open Graph Meta Tags -->
+  <!-- Open Graph Meta Tags for WhatsApp and Facebook -->
   <meta property="og:title" content="বিদেশ টিভির অভ্যন্তরীণ সংকট: মালিকানা বিভেদে নতুন চ্যানেলের জন্ম" />
   <meta property="og:description" content="সহ–প্রতিষ্ঠাতা মো: রাহিম হঠাৎ সরে যাওয়ায় ‘বিদেশ টিভি’ চ্যানেল অনিশ্চয়তায়। তিনি কিছু রিপোর্টারকে নিয়ে গোপনে একটি নতুন চ্যানেল গঠন করছেন।" />
   <meta property="og:image" content="https://bdeshtv.github.io/my-bdeshtv-site/images/rahim.jpg" />
@@ -19,7 +19,7 @@
       background-color: #fffef5;
       color: #333;
       margin: 0;
-      padding: 0 15px;
+      padding: 0;
       line-height: 1.6;
     }
     .container {
@@ -30,20 +30,52 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
+    .logo {
+      display: block;
+      max-width: 200px;
+      margin: 20px auto;
+    }
     img.feature {
       max-width: 100%;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
     h1 {
       color: #c0392b;
       font-size: 24px;
       margin-bottom: 10px;
+      text-align: center;
     }
     .meta {
       font-size: 14px;
       color: #777;
       margin-bottom: 20px;
+      text-align: center;
+    }
+    .founders {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .founder {
+      text-align: center;
+      width: 45%;
+    }
+    .founder img {
+      max-width: 120px;
+      border-radius: 50%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .founder-name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .founder-bio {
+      font-size: 14px;
+      color: #555;
     }
     footer {
       text-align: center;
@@ -56,6 +88,11 @@
 </head>
 <body>
   <div class="container">
+
+    <!-- Logo -->
+    <img src="images/1000127778.png" alt="B-desh TV Logo" class="logo" />
+
+    <!-- News Content -->
     <h1>বিদেশ টিভির অভ্যন্তরীণ সংকট: মালিকানা বিভেদে নতুন চ্যানেলের জন্ম</h1>
     <p class="meta">📅 ১৯ জুন, ২০২৫ | 📍 দুবাই, সংযুক্ত আরব আমিরাত</p>
     <img src="images/rahim.jpg" alt="রাহিম" class="feature">
@@ -79,6 +116,20 @@
     <p>বিদেশ টিভি কর্তৃপক্ষ তানভির ও ফয়সাল জানান, তারা নতুন করে টিম গঠন করছেন এবং প্রবাসীদের সঠিক তথ্য ও সংবাদ সরবরাহে প্রতিশ্রুতিবদ্ধ থাকবেন।</p>
 
     <p><strong>📝 রিপোর্ট: বিদেশ টিভি সংবাদ ডেস্ক</strong></p>
+
+    <!-- Founder Section -->
+    <div class="founders">
+      <div class="founder">
+        <img src="images/tanvirul_islam_rifat.jpg" alt="তানভিরুল ইসলাম রিফাত" />
+        <div class="founder-name">তানভিরুল ইসলাম রিফাত</div>
+        <div class="founder-bio">মালিক পক্ষ - বিদেশ টিভি</div>
+      </div>
+      <div class="founder">
+        <img src="images/faysal_ahmed.jpg" alt="ফয়সাল আহমেদ" />
+        <div class="founder-name">ফয়সাল আহমেদ</div>
+        <div class="founder-bio">মালিক পক্ষ - বিদেশ টিভি</div>
+      </div>
+    </div>
   </div>
 
   <footer>

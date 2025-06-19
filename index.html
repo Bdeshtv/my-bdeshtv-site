@@ -55,6 +55,37 @@
       border-radius: 8px;
     }
 
+    .latest-news-box {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      background: #fff9e6;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .latest-news-box img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      float: left;
+      margin-right: 15px;
+    }
+
+    .latest-news-box h3 {
+      margin-top: 0;
+      font-size: 1.2em;
+    }
+
+    .latest-news-box::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
     footer {
       background-color: #f2f2f2;
       padding: 15px;
@@ -80,6 +111,14 @@
     <p>এটি একটি গণ মাধ্যম সংবাদ পেইজ, এখানে দেশ ও বিশ্বের সর্বশেষ খবর প্রকাশ করা হয়।</p>
   </section>
 
+  <!-- Latest News Section -->
+  <section id="latest">
+    <h2>সর্বশেষ খবর</h2>
+    <div id="latest-news" class="latest-news-box">
+      <p>লোড হচ্ছে...</p>
+    </div>
+  </section>
+
   <!-- Banner Image Section -->
   <section>
     <img src="images/FB_IMG_1750081031282.jpg" alt="বিদেশ টিভি ব্যানার" class="banner">
@@ -88,6 +127,32 @@
   <footer>
     &copy; 2025 B-deshtv. সর্বস্বত্ব সংরক্ষিত।
   </footer>
+
+  <!-- JS for Latest News -->
+  <script>
+    fetch('news.json')
+      .then(response => response.json())
+      .then(data => {
+        const latest = data.find(news => news.id === "3");
+        if (latest) {
+          const html = `
+            <img src="${latest.image}" alt="${latest.title}">
+            <div>
+              <h3>${latest.title}</h3>
+              <p><strong>${latest.date}</strong></p>
+              <p><a href="news.html?id=${latest.id}">বিস্তারিত পড়ুন →</a></p>
+            </div>
+          `;
+          document.getElementById('latest-news').innerHTML = html;
+        } else {
+          document.getElementById('latest-news').innerHTML = '<p>নিউজ পাওয়া যায়নি।</p>';
+        }
+      })
+      .catch(error => {
+        console.error('নিউজ লোড করতে সমস্যা:', error);
+        document.getElementById('latest-news').innerHTML = '<p>নিউজ লোড করতে সমস্যা হয়েছে।</p>';
+      });
+  </script>
 
 </body>
 </html>
